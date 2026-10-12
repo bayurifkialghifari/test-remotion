@@ -62,11 +62,8 @@ export const Scene3Bento: React.FC<{ duration: number }> = ({ duration }) => {
               }}
             >
               <Terminal
-                commandText="agy --agent=research 'analyze bottlenecks'"
-                typeStartFrame={0}
-                showOutput={true}
-                outputStartFrame={15}
-                width={620}
+                width={640}
+                interactivePhase={false}
               />
             </div>
           </Breathing>

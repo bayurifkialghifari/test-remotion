@@ -35,32 +35,68 @@ export const Entrance: React.FC<{
 };
 ```
 
-## 2. Realistic Developer CLI Harness Component
+## 2. Realistic Antigravity CLI (`agy`) TUI Harness Component
 ```tsx
-export const RealTuiHarness: React.FC<{
-  workspace: string;
-  model: string;
-  command: string;
-  toolCall: string;
-}> = ({ workspace, model, command, toolCall }) => (
+// 11x8 ANSI 24-bit RGB Pixel Art Arch Logo
+export const PixelLogo: React.FC<{ size?: number }> = ({ size = 7 }) => {
+  const blocks: [number, number, string][] = [
+    [4, 0, "#FFA726"], [5, 0, "#FF5722"],
+    [3, 1, "#FDD835"], [4, 1, "#FB8C00"], [5, 1, "#F4511E"], [6, 1, "#E53935"],
+    [2, 2, "#9CCC65"], [3, 2, "#D4E157"], [4, 2, "#FFA726"], [5, 2, "#FF7043"], [6, 2, "#E91E63"], [7, 2, "#BA68C8"],
+    [2, 3, "#7CB342"], [3, 3, "#9CCC65"], [7, 3, "#AB47BC"], [8, 3, "#8E24AA"],
+    [1, 4, "#4CAF50"], [2, 4, "#66BB6A"], [8, 4, "#5C6BC0"], [9, 4, "#3F51B5"],
+    [1, 5, "#26A69A"], [2, 5, "#42A5F5"], [8, 5, "#3949AB"], [9, 5, "#1E88E5"],
+    [0, 6, "#4DD0E1"], [1, 6, "#29B6F6"], [9, 6, "#1976D2"], [10, 6, "#2196F3"],
+    [0, 7, "#80DEEA"], [1, 7, "#4FC3F7"], [9, 7, "#1976D2"], [10, 7, "#1565C0"],
+  ];
+  return (
+    <div style={{ position: "relative", width: 11 * size, height: 8 * size }}>
+      {blocks.map(([col, row, color], i) => (
+        <div key={i} style={{ position: "absolute", left: col * size, top: row * size, width: size - 0.5, height: size - 0.5, backgroundColor: color, borderRadius: 1 }} />
+      ))}
+    </div>
+  );
+};
+
+export const RealAgyTui: React.FC<{
+  email?: string;
+  model?: string;
+  workspace?: string;
+  prompt?: string;
+}> = ({
+  email = "bayurifkialgh@gmail.com (Google AI Pro)",
+  model = "Gemini 3.8 Flash (High)",
+  workspace = "~/montion/test-agy",
+  prompt = "/plan orchestrate zero-g motion design",
+}) => (
   <div style={{
-    borderRadius: 18,
-    backgroundColor: "rgba(18, 18, 20, 0.9)",
+    borderRadius: 14,
+    backgroundColor: "rgba(32, 10, 26, 0.94)", // Authentic Ubuntu plum dark terminal
     border: "1px solid rgba(255, 255, 255, 0.12)",
-    boxShadow: "0 30px 80px -15px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.12)",
-    backdropFilter: "blur(40px)",
+    boxShadow: "0 30px 80px -15px rgba(0, 0, 0, 0.92)",
     fontFamily: "JetBrains Mono, monospace",
     padding: 24,
   }}>
-    {/* TUI Session Box */}
-    <div style={{ border: "1px solid rgba(255, 255, 255, 0.1)", borderRadius: 10, padding: 14 }}>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <strong style={{ color: "#FFF" }}>Antigravity CLI (agy)</strong>
-        <span style={{ color: "#0A84FF", fontSize: 12 }}>{workspace}</span>
+    {/* Session Header */}
+    <div style={{ display: "flex", gap: 18, marginBottom: 16 }}>
+      <PixelLogo size={7.5} />
+      <div style={{ display: "flex", flexDirection: "column", gap: 3, fontSize: 13 }}>
+        <span style={{ color: "#3B82F6", fontWeight: 600 }}>Antigravity CLI 1.3.3</span>
+        <span style={{ color: "#9CA3AF" }}>{email}</span>
+        <span style={{ color: "#9CA3AF" }}>{model}</span>
+        <span style={{ color: "#9CA3AF" }}>{workspace}</span>
       </div>
-      <div style={{ color: "rgba(235, 235, 245, 0.6)", fontSize: 12, marginTop: 4 }}>
-        Model: <strong style={{ color: "#93C5FD" }}>{model}</strong> • Effort: <strong style={{ color: "#30D158" }}>MAX</strong>
-      </div>
+    </div>
+    {/* Divider & Prompt Bar */}
+    <div style={{ height: 1, backgroundColor: "rgba(255, 255, 255, 0.16)", margin: "12px 0" }} />
+    <div style={{ display: "flex", gap: 8, color: "#FFF" }}>
+      <span style={{ color: "#3B82F6" }}>&gt;</span>
+      <span>{prompt}</span>
+    </div>
+    <div style={{ height: 1, backgroundColor: "rgba(255, 255, 255, 0.16)", margin: "12px 0" }} />
+    <div style={{ display: "flex", justifyContent: "space-between", color: "#9CA3AF", fontSize: 12 }}>
+      <span>? for shortcuts</span>
+      <span><strong style={{ color: "#3B82F6" }}>plan</strong> • Gemini 3.8 Flash • high</span>
     </div>
   </div>
 );

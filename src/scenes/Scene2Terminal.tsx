@@ -78,11 +78,8 @@ export const Scene2Terminal: React.FC<{ duration: number }> = ({ duration }) => 
           }}
         >
           <Terminal
-            commandText='agy --effort=max "orchestrate full-stack refactor"'
-            typeStartFrame={6}
-            showOutput={true}
-            outputStartFrame={36}
-            width={1000}
+            width={1080}
+            interactivePhase={true}
           />
         </div>
       </Breathing>
